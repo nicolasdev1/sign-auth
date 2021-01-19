@@ -27,14 +27,9 @@ app.post('/api/v1/signup', (request, response) => {
     db.query(
         'INSERT INTO users (name, email, password, passwordConfirmation) VALUES (?, ?, ?, ?)',
         [name, email, password, passwordConfirmation],
-        (error, result) => {
+        (error, rows, _) => {
             error && console.log(error)
-            result && response.send({
-                name,
-                email,
-                password,
-                passwordConfirmation
-            })
+            rows && response.send(rows)
         }
     )
 })
