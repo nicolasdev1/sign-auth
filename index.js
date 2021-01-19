@@ -29,7 +29,13 @@ app.post('/api/v1/signup', (request, response) => {
         [name, email, password, passwordConfirmation],
         (error, rows, _) => {
             error && console.log(error)
-            rows && response.send(rows)
+            rows && response.send({
+                id: rows.insertId,
+                name,
+                email,
+                password,
+                passwordConfirmation
+            })
         }
     )
 })
