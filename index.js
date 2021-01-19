@@ -79,6 +79,4 @@ app.delete('/users/:id', (request, response) => {
     )
 })
 
-const port = process.env.PORT || 5001
-
-app.listen(port, () => console.log(`Server running on port ${port}...`))
+app.listen(process.env.PORT || 7777)
