@@ -16,7 +16,7 @@ const db = mysql.createConnection({
     port: process.env.DB_PORT
 })
 
-app.post('api/v1/signup', (request, response) => {
+app.post('/api/v1/signup', (request, response) => {
     const {
         name,
         email,
@@ -39,7 +39,7 @@ app.post('api/v1/signup', (request, response) => {
     )
 })
 
-app.post('api/v1/signin', (request, response) => {
+app.post('/api/v1/signin', (request, response) => {
     const {
         email,
         password
@@ -55,7 +55,7 @@ app.post('api/v1/signin', (request, response) => {
     )
 })
 
-app.get('api/v1/users', (_, response) => {
+app.get('/api/v1/users', (_, response) => {
     db.query(
         'SELECT * FROM users',
         [],
@@ -66,7 +66,7 @@ app.get('api/v1/users', (_, response) => {
     )
 })
 
-app.delete('api/v1/users/:id', (request, response) => {
+app.delete('/api/v1/users/:id', (request, response) => {
     const id = request.params.id
 
     db.query(
