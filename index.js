@@ -49,9 +49,9 @@ app.post('/api/v1/signin', (request, response) => {
     db.query(
         'SELECT * FROM users WHERE email = ? AND password = ?',
         [email, password],
-        (error, result) => {
+        (error, rows, _) => {
             error && response.send({ error })
-            result ? response.send(result) : response.send({ message: 'Wrong email/password combination!' })
+            rows ? response.send(rows) : response.send({ message: 'Wrong email/password combination!' })
         }
     )
 })
@@ -60,7 +60,7 @@ app.get('/api/v1/users', (_, response) => {
     db.query(
         'SELECT * FROM users',
         [],
-        (error, rows, fields) => {
+        (error, rows, _) => {
             error && console.log(error)
             rows && response.send(rows)
         }
@@ -76,6 +76,19 @@ app.delete('/api/v1/users/:id', (request, response) => {
         (error, result) => {
             error && console.log(error),
             result && response.send({ message: 'User deleted successfully.' })
+        }
+    )
+})
+
+app.get('/api/v1/users/:id', (request, response) => {
+    const id = request.params.id
+
+    db.query(
+        'SELECT * FROM users WHERE id = ?',
+        [id],
+        (error, rows, fields) => {
+            error && console.log(error)
+            rows && response.send(rows)
         }
     )
 })
